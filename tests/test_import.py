@@ -1,0 +1,1 @@
+from kaspa_grpcclient.proto.client import rpc_pb2
