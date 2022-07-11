@@ -4,7 +4,7 @@ package protowire;
 
 option go_package = "github.com/kaspanet/kaspad/protowire";
 
-import "rpc.proto";
+import "proto/rpc.proto";
 
 message KaspadMessage {
     oneof payload {

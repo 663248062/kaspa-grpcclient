@@ -2,4 +2,4 @@
 venv
 build
 dist
-kaspa_grpcclient.egg-info
+kaspa_grpc.egg-info

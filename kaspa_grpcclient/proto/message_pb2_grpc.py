@@ -2,7 +2,8 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from . import message_pb2 as message__pb2
+from kaspa_grpcclient.proto import message_pb2 as proto_dot_message__pb2
+
 
 class RPCStub(object):
     """Missing associated documentation comment in .proto file."""
@@ -15,8 +16,8 @@ class RPCStub(object):
         """
         self.MessageStream = channel.stream_stream(
                 '/protowire.RPC/MessageStream',
-                request_serializer=message__pb2.KaspadMessage.SerializeToString,
-                response_deserializer=message__pb2.KaspadMessage.FromString,
+                request_serializer=proto_dot_message__pb2.KaspadMessage.SerializeToString,
+                response_deserializer=proto_dot_message__pb2.KaspadMessage.FromString,
                 )
 
 
@@ -34,8 +35,8 @@ def add_RPCServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'MessageStream': grpc.stream_stream_rpc_method_handler(
                     servicer.MessageStream,
-                    request_deserializer=message__pb2.KaspadMessage.FromString,
-                    response_serializer=message__pb2.KaspadMessage.SerializeToString,
+                    request_deserializer=proto_dot_message__pb2.KaspadMessage.FromString,
+                    response_serializer=proto_dot_message__pb2.KaspadMessage.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -59,7 +60,7 @@ class RPC(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.stream_stream(request_iterator, target, '/protowire.RPC/MessageStream',
-            message__pb2.KaspadMessage.SerializeToString,
-            message__pb2.KaspadMessage.FromString,
+            proto_dot_message__pb2.KaspadMessage.SerializeToString,
+            proto_dot_message__pb2.KaspadMessage.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
